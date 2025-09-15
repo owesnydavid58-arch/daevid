@@ -1,0 +1,100 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Check, Sparkles, PlugZap, Shield, Phone, Mail, ArrowRight, Cpu, Clock, Settings, LineChart } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+
+export default function Site() {
+const [submitted, setSubmitted] = useState(false);
+
+
+return (
+<div className="min-h-screen bg-gray-50 text-gray-900">
+{/* Nav */}
+<header className="sticky top-0 z-30 backdrop-blur bg-white/80 border-b">
+<div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+<div className="flex items-center gap-2">
+<div className="h-8 w-8 rounded-2xl bg-black text-white grid place-items-center"><Cpu size={18} /></div>
+<span className="font-semibold">KI Automatisierung • KMU</span>
+</div>
+<nav className="hidden md:flex items-center gap-6 text-sm">
+<a href="#leistungen" className="hover:text-black">Leistungen</a>
+<a href="#ablauf" className="hover:text-black">Ablauf</a>
+<a href="#preise" className="hover:text-black">Preise</a>
+<a href="#faq" className="hover:text-black">FAQ</a>
+</nav>
+<a href="#kontakt" className="inline-flex items-center gap-2 text-sm font-medium"><Phone size={16}/> Kontakt</a>
+</div>
+</header>
+
+
+{/* Hero */}
+<section className="relative overflow-hidden">
+<div className="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+<div>
+<motion.h1 initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:.5}} className="text-4xl md:text-5xl font-extrabold leading-tight">
+Mehr Zeit. Weniger Bürokratie.
+<br />
+<span className="bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">KI-Automatisierungen für kleine Unternehmen</span>
+</motion.h1>
+<p className="mt-5 text-lg text-gray-600">
+Ich verbinde Ihre bestehenden Tools (E-Mail, Kalender, CRM, Rechnungen) mit KI-Workflows.
+Ergebnis: <strong>10–20 Stunden Zeitersparnis pro Monat</strong> – ohne IT-Abteilung.
+</p>
+<div className="mt-8 flex flex-wrap gap-3">
+<a href="#kontakt"><Button className="rounded-2xl px-6">Kostenloses Erstgespräch buchen <ArrowRight className="ml-2" size={16} /></Button></a>
+<a href="#preise"><Button variant="outline" className="rounded-2xl px-6">Pakete ansehen</Button></a>
+</div>
+<div className="mt-6 flex items-center gap-4 text-sm text-gray-500">
+<div className="flex items-center gap-2"><Shield size={16}/> DSGVO-orientierte Umsetzung</div>
+<div className="flex items-center gap-2"><Clock size={16}/> Start in 7–14 Tagen</div>
+</div>
+</div>
+<div>
+<div className="grid grid-cols-2 gap-4">
+{[{icon:PlugZap,title:"Autom. E-Mail-Antworten",desc:"Standardanfragen qualifizieren & weiterleiten"},{icon:Settings,title:"Rechnungs-Workflows",desc:"Belegerfassung & Rechnungsentwürfe"},{icon:LineChart,title:"Berichte per Klick",desc:"Umsatz, Angebote, Offene Posten"},{icon:Sparkles,title:"KI-Assistenten",desc:"Wissens-FAQ für Team & Kunden"}].map((b,i)=> (
+<Card key={i} className="rounded-2xl shadow-sm">
+<CardContent className="p-5">
+<div className="h-10 w-10 rounded-xl bg-gray-900 text-white grid place-items-center mb-3">
+{b.icon === PlugZap && <PlugZap size={18}/>}
+{b.icon === Settings && <Settings size={18}/>}
+{b.icon === LineChart && <LineChart size={18}/>}
+{b.icon === Sparkles && <Sparkles size={18}/>}
+</div>
+<div className="font-semibold">{b.title}</div>
+<div className="text-sm text-gray-600 mt-1">{b.desc}</div>
+</CardContent>
+</Card>
+))}
+</div>
+</div>
+</div>
+</section>
+
+
+{/* Trust bar */}
+<section className="bg-white border-y">
+<div className="max-w-6xl mx-auto px-4 py-8 grid md:grid-cols-4 gap-6 text-center">
+{["Handwerk & Bau", "Beratung & Agenturen", "Gesundheit & Praxen", "Steuer & Kanzleien"].map((t,i)=> (
+<div key={i} className="text-sm text-gray-600">{t}</div>
+))}
+</div>
+</section>
+
+
+{/* Leistungen */}
+<section id="leistungen" className="max-w-6xl mx-auto px-4 py-16">
+<h2 className="text-3xl font-bold">Leistungen</h2>
+<p className="text-gray-600 mt-2">Modular buchbar – Sie wählen, was wirklich Mehrwert bringt.</p>
+<div className="grid md:grid-cols-3 gap-6 mt-8">
+{[
+{title:"E-Mail & Ticket-Automation", points:["Auto-Antworten & Vorqualifizierung","Routing zu richtigen Personen","CRM-Ablage" ]},
+{title:"Dokumente & Rechnungen", points:["Belegerfassung mit KI","Rechnungsentwürfe vorbereiten","Freigabe-Workflow"]},
+{title:"Reports & Kennzahlen", points:["Umsatz & Deckungsbeiträge","Offene Posten","Team-Performance"]},
+{title:"KI-Wissensassistent", points:["FAQ aus Ihren Dokumenten","Antwortvorschläge fürs Team","Sichere Rechteverwaltung"]},
+{title:"Tool-Verknüpfungen (No-Code)", points:["Zapier/Make Workflows","Kalender, CRM, Drive","Benachrichtigungen"]},
+{title:"Schulung & Change", points:["Team-Training","Guides & SOPs","Iterative Verbesserung"]},
+].map((s,i)=> (
+<Card key={i} className="rounded-2xl">
+<CardContent className="p-6">
