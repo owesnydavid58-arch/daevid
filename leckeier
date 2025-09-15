@@ -1,0 +1,189 @@
+import React, { useState } from "react";
+
+// Mini-Bausteine statt shadcn/ui
+function Card({ children, className = "" }) {
+  return <div className={`card ${className}`}>{children}</div>;
+}
+function CardContent({ children, className = "" }) {
+  return <div className={`card-content ${className}`}>{children}</div>;
+}
+function Button({ children, variant, className = "", ...props }) {
+  const base = "btn";
+  const kind = variant === "outline" ? "btn-outline" : "btn-primary";
+  return (
+    <button className={`${base} ${kind} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+export default function App() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const boxes = [
+    { title: "Autom. E-Mail-Antworten", desc: "Standardanfragen qualifizieren & weiterleiten" },
+    { title: "Rechnungs-Workflows", desc: "Belegerfassung & Rechnungsentwürfe" },
+    { title: "Berichte per Klick", desc: "Umsatz, Angebote, Offene Posten" },
+    { title: "KI-Assistenten", desc: "Wissens-FAQ für Team & Kunden" },
+  ];
+
+  const services = [
+    { title: "E-Mail & Ticket-Automation", points: ["Auto-Antworten & Vorqualifizierung","Routing zu richtigen Personen","CRM-Ablage"]},
+    { title: "Dokumente & Rechnungen", points: ["Belegerfassung mit KI","Rechnungsentwürfe vorbereiten","Freigabe-Workflow"]},
+    { title: "Reports & Kennzahlen", points: ["Umsatz & Deckungsbeiträge","Offene Posten","Team-Performance"]},
+    { title: "KI-Wissensassistent", points: ["FAQ aus Ihren Dokumenten","Antwortvorschläge fürs Team","Rechteverwaltung"]},
+    { title: "Tool-Verknüpfungen (No-Code)", points: ["Zapier/Make Workflows","Kalender, CRM, Drive","Benachrichtigungen"]},
+    { title: "Schulung & Change", points: ["Team-Training","Guides & SOPs","Iterative Verbesserung"]},
+  ];
+
+  const packages = [
+    { name: "Starter", price: "990€", features: ["1 Prozess automatisiert","Basis-Training (60 Min)","E-Mail-Support 14 Tage"] },
+    { name: "Pro", price: "2.490€", features: ["3 Prozesse automatisiert","Team-Schulung","Dashboard / Reporting"] },
+    { name: "Betreuung", price: "790€/Monat", features: ["Priorisierte Weiterentwicklung","Monatliche Optimierung","SLA-Support"] },
+  ];
+
+  return (
+    <div className="page">
+      {/* Nav */}
+      <header className="nav">
+        <div className="container nav-inner">
+          <strong>KI Automatisierung • KMU</strong>
+          <nav className="nav-links">
+            <a href="#leistungen">Leistungen</a>
+            <a href="#ablauf">Ablauf</a>
+            <a href="#preise">Preise</a>
+            <a href="#kontakt">Kontakt</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="container hero">
+        <h1>Mehr Zeit. Weniger Bürokratie.</h1>
+        <p>
+          Ich verbinde Ihre bestehenden Tools (E-Mail, Kalender, CRM, Rechnungen) mit KI-Workflows.
+          Ergebnis: <strong>10–20 Stunden Zeitersparnis pro Monat</strong> – ohne IT-Abteilung.
+        </p>
+        <div className="cta">
+          <a href="#kontakt"><Button>Kostenloses Erstgespräch</Button></a>
+          <a href="#preise"><Button variant="outline">Pakete ansehen</Button></a>
+        </div>
+        <div className="badges">
+          <span>🛡️ DSGVO-orientierte Umsetzung</span>
+          <span>⏱️ Start in 7–14 Tagen</span>
+        </div>
+
+        <div className="grid-2">
+          {boxes.map((b, i) => (
+            <Card key={i} className="shadow-sm">
+              <CardContent>
+                <div className="icon">✨</div>
+                <div className="card-title">{b.title}</div>
+                <div className="muted">{b.desc}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust bar */}
+      <section className="trust">
+        <div className="container trust-grid">
+          {["Handwerk & Bau","Beratung & Agenturen","Gesundheit & Praxen","Steuer & Kanzleien"].map((t,i)=>(
+            <div key={i} className="muted center">{t}</div>
+          ))}
+        </div>
+      </section>
+
+      {/* Leistungen */}
+      <section id="leistungen" className="container section">
+        <h2>Leistungen</h2>
+        <p className="muted">Modular buchbar – Sie wählen, was wirklich Mehrwert bringt.</p>
+        <div className="grid-3">
+          {services.map((s,i)=>(
+            <Card key={i}>
+              <CardContent>
+                <div className="card-title">{s.title}</div>
+                <ul className="list">
+                  {s.points.map((p,idx)=> <li key={idx}>✓ {p}</li>)}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Ablauf */}
+      <section id="ablauf" className="section section-alt">
+        <div className="container">
+          <h2>So arbeiten wir zusammen</h2>
+          <div className="grid-4">
+            {[
+              {step:"1", title:"Kurz-Check (30 Min)", text:"Bedarf & Potenziale identifizieren – kostenlos"},
+              {step:"2", title:"Pilot (7–14 Tage)", text:"1 Prozess automatisieren, direkt messbare Wirkung"},
+              {step:"3", title:"Rollout", text:"Weitere Prozesse nach Nutzen-Priorität"},
+              {step:"4", title:"Betreuung", text:"Monatliche Optimierung & Support"},
+            ].map((a,i)=>(
+              <Card key={i}><CardContent>
+                <div className="tiny muted">Schritt {a.step}</div>
+                <div className="card-title">{a.title}</div>
+                <p className="muted">{a.text}</p>
+              </CardContent></Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Preise */}
+      <section id="preise" className="container section">
+        <h2>Transparente Pakete</h2>
+        <p className="muted">Fixpreise für kleine Unternehmen. Individuelle Angebote möglich.</p>
+        <div className="grid-3">
+          {packages.map((p,i)=>(
+            <Card key={i} className={i===1 ? "highlight" : ""}>
+              <CardContent>
+                <div className="pack-head">
+                  <div className="card-title">{p.name}</div>
+                  <div className="price">{p.price}</div>
+                </div>
+                <ul className="list">
+                  {p.features.map((f,idx)=><li key={idx}>✓ {f}</li>)}
+                </ul>
+                <a href="#kontakt"><Button className="w-full">Anfragen</Button></a>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <p className="tiny muted">Hinweis: Umsetzung DSGVO-orientiert. Keine Rechtsberatung.</p>
+      </section>
+
+      {/* Kontakt */}
+      <section id="kontakt" className="container section">
+        <h2>Kontakt aufnehmen</h2>
+        <p className="muted">Kurzer Austausch – ich zeige Ihnen, wo Automatisierung sofort wirkt.</p>
+        {!submitted ? (
+          <form
+            onSubmit={(e)=>{e.preventDefault(); setSubmitted(true);}}
+            className="form"
+          >
+            <input required placeholder="Firma" className="input" />
+            <input required type="email" placeholder="E-Mail" className="input" />
+            <input placeholder="Telefon (optional)" className="input" />
+            <textarea placeholder="Welche Prozesse nerven Sie aktuell?" className="input" rows={5} />
+            <Button type="submit">Anfrage senden</Button>
+            <div className="tiny">
+              oder direkt: <a href="mailto:hello@example.com">hello@example.com</a> · <a href="tel:+41790000000">+41 79 000 00 00</a>
+            </div>
+          </form>
+        ) : (
+          <div className="notice">✅ Danke! Ich melde mich innerhalb von 24h.</div>
+        )}
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container tiny muted">© {new Date().getFullYear()} KI Automatisierung • KMU</div>
+      </footer>
+    </div>
+  );
+}
